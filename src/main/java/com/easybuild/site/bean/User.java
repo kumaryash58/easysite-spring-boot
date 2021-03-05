@@ -23,7 +23,7 @@ public class User {
 	@Column(name = "password")
 	@JsonIgnore
 	private String password;
-
+/////////////////////////////////
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name = "fk_user_id", referencedColumnName = "id")
 //	private List<Post> post;

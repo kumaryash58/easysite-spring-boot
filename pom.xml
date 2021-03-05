@@ -56,6 +56,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+	</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -104,8 +109,14 @@
 			<artifactId>spring-boot-maven-plugin</artifactId>
 		</plugin>
 
-
-		<plugin>
+<!-- --> <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <fork>true</fork>
+                <executable>C:\Program Files\Java\jdk1.8.0_251\bin\javac.exe</executable>
+            </configuration>
+        </plugin>  
+ <plugin>
 			<artifactId>maven-resources-plugin</artifactId>
 			<executions>
 				<execution>
@@ -119,20 +130,21 @@
 						<resources>
 							<resource>
 								<directory>../dist/FormSubmit</directory>
+								<includes>index.html</includes>
 							</resource>
 						</resources>
 					</configuration>
 				</execution>
 			</executions>
 		</plugin>
-   <plugin>
+ <!--   <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
             </configuration>
-        </plugin>
+        </plugin>  	 -->
 	</plugins>
 </build>
 

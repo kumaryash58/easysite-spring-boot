@@ -102,9 +102,9 @@ public class UserService {
 		Optional<User> user = Optional.empty();
 		if (!userRepository.findByEmail(email).isPresent()) {
 			try {
-				File folder = Utils.createUserFolderInDrive(email, username);
-				String userFolderName = folder.getName();
-				String folderParentId = folder.getId();
+			//	File folder = Utils.createUserFolderInDrive(email, username);
+				String userFolderName = "";//folder.getName();
+				String folderParentId = "";//folder.getId();
 				String profileImgPath = Utils.getDefaultProfilePathByGender(gender);
 //				String contentType = Utils.getContentTypeByFileName(profileImgPath);
 //

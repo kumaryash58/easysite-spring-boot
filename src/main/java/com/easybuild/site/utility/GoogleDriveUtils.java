@@ -10,6 +10,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.easybuild.site.constants.Constant;
 import com.google.api.client.auth.oauth2.Credential;
@@ -25,6 +27,8 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.drive.Drive;
  
 public class GoogleDriveUtils {
+	
+	public static final Logger logger = LogManager.getLogger(GoogleDriveUtils.class);
  
     private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
  
@@ -41,7 +45,8 @@ public class GoogleDriveUtils {
     static {
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATA_STORE_FACTORY = new FileDataStoreFactory(new File(Constant.CREDENTIALS_FILE_PATH));
+            DATA_STORE_FACTORY = new FileDataStoreFactory(new File("\\src\\main\\resources"+Constant.CREDENTIALS_FILE_PATH));
+            logger.info("DATA_STORE_FACTORY Path {}", DATA_STORE_FACTORY);
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(1);

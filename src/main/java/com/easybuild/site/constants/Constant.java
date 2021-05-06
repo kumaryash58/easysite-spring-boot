@@ -24,5 +24,17 @@ public class Constant {
 		public static final String RESOURCE_PATH = "resources";
 		
 		public static final String BASE_UI_PATH = "C:/Users/Lenovo/Desktop/Personal Blog/Site/Site/src/main/ui/";
+		
+		public static final String DEFAULT_ROLE = "ADMIN";
+		
+		public static final String TEMPLATE_SNAPSHOT_FOLDER_PARENT_ID = "1T8GSfjqapMfLt4bHPsWLr8VvYOS3sWLo";
+		
+		public static final String STATUS_SUCCESS = "success";
+		public static final String STATUS_FAILURE = "failure";
+		public static final String RESULT = "result";
+		public static final String MESSAGE = "message";
+		public static final String STATUS = "status";
+		public static final String CODE = "code";
+		public static final String DATA = "data";
 
 }

@@ -8,22 +8,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.easybuild.site.repository.UserRepository;
+import com.easybuild.site.dao.UserDAO;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserDAO userDAO;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		if (userRepository.findByEmail(email).isPresent()) {
+		if (userDAO.findByEmail(email).isPresent()) {
 			return new User(email, "admin",
 					new ArrayList<>());
 		} else {
-			throw new UsernameNotFoundException("User not found with username: " + email);
+			throw new UsernameNotFoundException("User not found with email: " + email);
 		}
 	}
 	

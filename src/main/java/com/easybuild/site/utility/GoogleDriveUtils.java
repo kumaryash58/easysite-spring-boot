@@ -45,7 +45,9 @@ public class GoogleDriveUtils {
     static {
         try {
             HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATA_STORE_FACTORY = new FileDataStoreFactory(new File("\\src\\main\\resources"+Constant.CREDENTIALS_FILE_PATH));
+            File DATA_STORE_FILE = new File(System.getProperty("user.home"), ".credentials"+Constant.CREDENTIALS_FILE_PATH);
+            logger.info("DATA_STORE_FILE Path {}", DATA_STORE_FILE);
+            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_FILE);
             logger.info("DATA_STORE_FACTORY Path {}", DATA_STORE_FACTORY);
         } catch (Throwable t) {
             t.printStackTrace();

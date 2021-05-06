@@ -17,6 +17,10 @@ public class PostDto {
 
 	private String description;
 
+	private String postBody;
+	
+	private String fileUrl;
+
 	public String getTitle() {
 		return title;
 	}
@@ -31,6 +35,22 @@ public class PostDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getPostBody() {
+		return postBody;
+	}
+
+	public void setPostBody(String postBody) {
+		this.postBody = postBody;
+	}
+
+	public String getFileUrl() {
+		return fileUrl;
+	}
+
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
 	}
 
 }

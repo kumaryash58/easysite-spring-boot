@@ -125,5 +125,15 @@ public class Utils {
 			logger.info("Compressed Image Byte Size - {}", outputStream.toByteArray().length);
 			return outputStream.toByteArray();
 		}
+		
+		public static String getDriveImgSrcLinkByFileId(String googleFileId) {
+			try {
+				// https://drive.google.com/uc?export=view&id=1R5q7SjlOUgZaFJhyV73j1k0M3HXQYn0R
+				return "https://drive.google.com/uc?export=view&id=" + googleFileId;
+			} catch (Exception e) {
+				logger.log(Level.ERROR, e.getMessage(), e);
+			}
+			return null;
+		}
 
 }

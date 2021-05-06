@@ -19,9 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException;
 
-import com.easybuild.site.bean.JwtResponse;
+import com.easybuild.site.dto.Response;
 import com.easybuild.site.dto.UserDto;
+import com.easybuild.site.entity.JwtResponse;
 import com.easybuild.site.service.UserService;
+
+
+import com.easybuild.site.constants.Code;
+import com.easybuild.site.constants.Constant;
+import com.easybuild.site.constants.Message;
 
 import net.minidev.json.JSONObject;
 
@@ -34,23 +40,59 @@ public class JwtAuthenticationController {
 
 	@Autowired
 	private UserService userService;
+	
+	//@Autowired
+	private Response response;
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-	public JSONObject createAuthenticationToken(@RequestBody @Valid UserDto userDto) throws Exception {
-		logger.info(userDto.getPassword());
+	public Response createAuthenticationToken(@RequestBody @Valid UserDto userDto) throws Exception {
 		logger.info(userDto.getEmail());
+		response = new Response();
 		try {
-			return userService.authenicate(userDto.getEmail(), userDto.getPassword());
+			JSONObject responseDetails = userService.authenicate(userDto.getEmail(), userDto.getPassword());
+			if (responseDetails != null && !responseDetails.isEmpty()) {
+				response.setCode(Code.SUCCESS);
+				response.setStatus(Constant.STATUS_SUCCESS);
+				response.setMessage(Message.ACCEPTED);
+				response.setData(responseDetails);
+			} else {
+				response.setCode(Code.BAD_REQUEST);
+				response.setStatus(Constant.STATUS_FAILURE);
+				response.setMessage(Message.BAD_REQUEST);
+			}
 		} catch (Exception e) {
 			logger.log(Level.ERROR, e.getMessage(), e);
 		}
-		return null;
-	//	return ResponseEntity.ok(new JwtResponse(token));
+		return response;
+		// return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
 	@GetMapping(path = { "/forgotPasswerd/{email}" })
 	public Optional<String> forgotPassword(@PathVariable("email") String email) {
 		logger.info("User Forgot Passwerd {}", email);
 		return userService.forgotPasswerd(email);
+	}
+	
+	@RequestMapping(value = "/loginWithGoogle", method = RequestMethod.POST)
+	public Response loginWithGoogle(@RequestBody @Valid UserDto userDto) throws Exception {
+		logger.info(userDto.getEmail());
+		response = new Response();
+		try {
+			JSONObject responseDetails = userService.authenicate(userDto.getEmail(), userDto.getPassword());
+			if (responseDetails != null && !responseDetails.isEmpty()) {
+				response.setCode(Code.SUCCESS);
+				response.setStatus(Constant.STATUS_SUCCESS);
+				response.setMessage(Message.ACCEPTED);
+				response.setData(responseDetails);
+			} else {
+				response.setCode(Code.BAD_REQUEST);
+				response.setStatus(Constant.STATUS_FAILURE);
+				response.setMessage(Message.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			logger.log(Level.ERROR, e.getMessage(), e);
+		}
+		return response;
+		// return ResponseEntity.ok(new JwtResponse(token));
 	}
 }

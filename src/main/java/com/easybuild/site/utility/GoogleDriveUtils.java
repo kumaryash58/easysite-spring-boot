@@ -64,9 +64,9 @@ public class GoogleDriveUtils {
     public static Credential getCredentials() throws IOException {
     	URL res = GoogleDriveUtils.class.getResource(Constant.CREDENTIALS_FILE_PATH);
     	File clientSecretFilePath = null;
-		try {
-			clientSecretFilePath = Paths.get(res.toURI()).toFile();
-		} catch (URISyntaxException e) {
+//		try {
+//			clientSecretFilePath = Paths.get(res.toURI()).toFile();
+//		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			final Map<String, String> env = new HashMap<>();
 			String[] array = null;
@@ -80,7 +80,7 @@ public class GoogleDriveUtils {
 			final Path path = fs.getPath(array[1]);
 			System.out.println("Path Now:" + path);
 			clientSecretFilePath = path.toFile();
-		}
+//		}
      //   java.io.File clientSecretFilePath = new java.io.File(Constant.RESOURCE_PATH + Constant.CREDENTIALS_FILE_PATH);
     	
         if (!clientSecretFilePath.exists()) {

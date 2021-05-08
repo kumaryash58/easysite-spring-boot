@@ -22,6 +22,7 @@ import com.easybuild.site.dao.UserDAO;
 import com.easybuild.site.entity.Post;
 import com.easybuild.site.entity.User;
 import com.easybuild.site.security.JwtTokenUtil;
+import com.easybuild.site.utility.AppConfig;
 import com.easybuild.site.utility.CreateGoogleFile;
 import com.easybuild.site.utility.ShareGoogleFile;
 import com.easybuild.site.utility.Utils;
@@ -114,10 +115,10 @@ public class UserService {
 		if (!userDAO.findByEmail(email).isPresent()) {
 			try {
 				String path = "src/main/resources";
-
+				String p = AppConfig.getConfigValue("BASEPATH");
 				java.io.File file = new java.io.File(path);
 				String absolutePath = file.getAbsolutePath();
-				System.out.println("absolutePath"+absolutePath);
+				System.out.println("absolutePath"+absolutePath+"BASE"+p);
 				File folder = Utils.createUserFolderInDrive(email, firstName);
 				String userFolderName = folder.getName();
 				String folderParentId = folder.getId();

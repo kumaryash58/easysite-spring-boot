@@ -57,10 +57,10 @@ public class GoogleDriveUtils {
     }
  
     public static Credential getCredentials() throws IOException {
-    	URL res = new URL(AppConfig.getConfigValue("BASEPATH")+"/static"+Constant.CREDENTIALS_FILE_PATH);
-    			//GoogleDriveUtils.class.getResource(Constant.CREDENTIALS_FILE_PATH);
-    	System.out.println("res:" + res);
-    	System.out.println("resPath:" + res.getPath());
+    	String path = AppConfig.getConfigValue("BASEPATH")+Constant.CREDENTIALS_FILE_PATH;
+    	System.out.println("path is:"+path);
+    	URL res = new File(path).toURI().toURL();//new URL(AppConfig.getConfigValue("BASEPATH")+Constant.CREDENTIALS_FILE_PATH);
+//    	URL res = GoogleDriveUtils.class.getResource(Constant.CREDENTIALS_FILE_PATH);
     	File clientSecretFilePath = null;
 		try {
 			clientSecretFilePath = Paths.get(res.toURI()).toFile();

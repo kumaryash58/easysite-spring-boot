@@ -6,16 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -55,32 +50,23 @@ public class GoogleDriveUtils {
             logger.info("DATA_STORE_FILE Path {}", DATA_STORE_FILE);
             DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_FILE);
             logger.info("DATA_STORE_FACTORY Path {}", DATA_STORE_FACTORY);
-        } catch (Throwable t) {
-            t.printStackTrace();
+        } catch (Exception t) {
+        	logger.log(Level.ERROR, t.getMessage(), t);
             System.exit(1);
         }
     }
  
     public static Credential getCredentials() throws IOException {
     	URL res = GoogleDriveUtils.class.getResource(Constant.CREDENTIALS_FILE_PATH);
+    	System.out.println("res:" + res);
+    	System.out.println("resPath:" + res.getPath());
     	File clientSecretFilePath = null;
-//		try {
-//			clientSecretFilePath = Paths.get(res.toURI()).toFile();
-//		} catch (URISyntaxException e) {
+		try {
+			clientSecretFilePath = Paths.get(res.toURI()).toFile();
+		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			final Map<String, String> env = new HashMap<>();
-			String[] array = null;
-			try {
-				array = res.toURI().toString().split("!");
-			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
-			final Path path = fs.getPath(array[1]);
-			System.out.println("Path Now:" + path);
-			clientSecretFilePath = path.toFile();
-//		}
+			e.printStackTrace();
+		}
      //   java.io.File clientSecretFilePath = new java.io.File(Constant.RESOURCE_PATH + Constant.CREDENTIALS_FILE_PATH);
     	
         if (!clientSecretFilePath.exists()) {

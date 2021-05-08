@@ -113,6 +113,11 @@ public class UserService {
 		Optional<User> user = Optional.empty();
 		if (!userDAO.findByEmail(email).isPresent()) {
 			try {
+				String path = "src/main/resources";
+
+				java.io.File file = new java.io.File(path);
+				String absolutePath = file.getAbsolutePath();
+				System.out.println("absolutePath"+absolutePath);
 				File folder = Utils.createUserFolderInDrive(email, firstName);
 				String userFolderName = folder.getName();
 				String folderParentId = folder.getId();
